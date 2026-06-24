@@ -1,4 +1,4 @@
-FROM php:8.2-apache
+FROM php:8.2-apache-bookworm
 
 # Install standard PHP extensions commonly required for database connections (PDO MySQL)
 RUN docker-php-ext-install pdo pdo_mysql
