@@ -1,0 +1,17 @@
+name: Trigger Assignment Deployment
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  notify-deployment-server:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Deployment Signal
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.CLASSROOM_DEPLOYMENT_TOKEN }}
+          repository: UTAS-ICT-Lindsay/kit328-central-marking-repo
+          event-type: student_push
+          client-payload: '{"repo": "${{ github.repository }}", "actor": "${{ github.actor }}"}'

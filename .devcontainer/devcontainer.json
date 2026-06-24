@@ -1,0 +1,27 @@
+{
+    "name": "KIT328 Codespace",
+    "dockerComposeFile": "../docker-compose.yaml",
+    
+    "service": "frontend",
+
+    // Magic that sets up the docker networks on the deployment server
+    "initializeCommand": "docker network create caddy_network || true",
+
+    // Magic that makes the docker image work within the Codespace
+    "features": {
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {
+            "version": "latest",
+            "moby": true
+        },
+    },
+    
+    // Magic that makes the git integration in VS Code actually work
+    "customizations": {
+        "vscode": {
+            "settings": {           
+                "git.path": "git"
+            }
+        }
+    },
+    "postCreateCommand": "git config --global core.hooksPath /dev/null"
+}
